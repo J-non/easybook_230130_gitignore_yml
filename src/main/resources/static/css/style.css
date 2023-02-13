@@ -1,0 +1,32 @@
+@charset "UTF-8";
+header {height:40px;}
+.header {height:40px;}
+
+a {text-decoration:none; color:#000;}
+a:hover {text-decoration:none; color:#000;}
+
+.category:hover {background-color:#333;}
+
+.menu2 {font-size:small;}
+
+.search-box {width:600px;}
+.search-category {font-size:small;}
+
+.main-list {background-color:#999; min-height:250px; max-width:950px;}
+.content-box {width:150px;}
+.category-title {max-height:30px; color:#000;}
+.t-form {font-size:15px; font-weight:bold;}
+.i-form {font-size:13px; font-weight:bold; color:#333;}
+
+.box-gap {gap:15px 89px;}
+.category-menu {max-height:500px;}
+
+.margin-box {margin-top:130px;}
+.login-box {width:500px; background-color:#999;}
+.login-select-box {width:130px; height:35px; background-color:#999; cursor:pointer;}
+#loginBtn {width:90px; height:90px; margin-top:28px;}
+#nMLoginBtn {width:90px; height:90px; margin-top:28px;}
+
+.sign-up-box {min-width:900px;}
+.sign-up-title-box {font-size:25px;}
+#emailCheckBtn {margin-left:68px;}

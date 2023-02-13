@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.easybook.user.dao.UserDAO">
+ 	<select id="exsitLoginId" parameterType="string" resultType="boolean">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`loginId` = #{loginId}
+ 	</select>
+ 	
+ 	<insert id="insertUser" parameterType="map">
+ 		INSERT INTO `user`
+ 		(
+ 			`name`
+			, `loginId`
+			, `password`
+			, `nickname`
+			, `email`
+			, `phoneNumber`
+			, `postCode`
+			, `address`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{name}
+ 			, #{loginId}
+ 			, #{password}
+ 			, #{loginId}
+ 			, #{email}
+ 			, #{phoneNumber}
+ 			, #{postCode}
+ 			, #{address}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ </mapper>

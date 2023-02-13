@@ -20,16 +20,3 @@
 		</form>
 	</div>
 </div>
-
-<script>
-	$(document).ready(function() {
-	/* 	$('#searchBtn').on('click', function(e) {
-			e.preventDefault();
-			let searchTarget = $('.search-category').val();
-			let query = $('#searchQuery').val().trim();
-			
-			location.href = "/search/search_result?searchTarget=" + searchTarget + "&query=" + query
-			
-		}) */
-	});
-</script>

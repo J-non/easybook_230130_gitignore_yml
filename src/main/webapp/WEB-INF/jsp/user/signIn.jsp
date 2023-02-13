@@ -15,7 +15,7 @@
 						<input type="text" id="loginId" class="form-control" placeholder="아이디를 입력하세요">
 					</div>
 					<div class="ml-3 pb-3">
-						<input type="text" id="mPassword" class="form-control" placeholder="비밀번호를 입력하세요">
+						<input type="password" id="mPassword" class="form-control" placeholder="비밀번호를 입력하세요">
 					</div>
 				</div>
 				<button type="button" id="loginBtn" class="btn btn-dark text-white font-weight-bold ml-2" >로그인</button>
@@ -37,7 +37,7 @@
 						<input type="text" id="email" class="form-control" placeholder="이메일 주소를 입력하세요">
 					</div>
 					<div class="ml-3 pb-3">
-						<input type="text" id="nMPassword" class="form-control" placeholder="비밀번호를 입력하세요">
+						<input type="password" id="nMPassword" class="form-control" placeholder="비밀번호를 입력하세요">
 					</div>
 				</div>
 				<button type="button" id="nMLoginBtn" class="btn btn-dark text-white font-weight-bold ml-2" >조회하기</button>

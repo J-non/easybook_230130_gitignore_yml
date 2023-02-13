@@ -9,7 +9,7 @@
 		</div>
 		<div class="box-gap d-flex flex-wrap">
 			<c:forEach var="book" items="${newBookList}">
-				<a href="#"><div class="content-box">
+				<div class="content-box" data-item-id="${book.itemId}">
 						<!-- 표지 -->
 						<div class="">
 							<img src="${book.coverImgUrl}" alt="책 표지" width="150"
@@ -37,8 +37,30 @@
 							</c:choose>
 						</div>
 						<div class="i-form">${book.publisher}</div>
-					</div></a>
+					</div>
 			</c:forEach>
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		// 상품 클릭 시 상품상세 화면으로
+		$('.content-box').on('click', function() {
+			let itemId = $(this).data('item-id');
+			
+			$.ajax({
+				type:"get"
+				, url:"/shop/detail_view"
+				, data:{"itemId":itemId}
+			
+				, success:function() {
+					location.href = "/shop/detail_view?itemId=" + itemId
+				}
+				, error:function(e) {
+					alert(e);
+				}
+			});
+		});	// 상품 클릭 시 상품상세 화면으로 끝
+	});
+</script>

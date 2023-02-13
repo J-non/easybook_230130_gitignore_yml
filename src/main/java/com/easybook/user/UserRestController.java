@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.easybook.common.EncryptUtils;
 import com.easybook.user.bo.UserBO;
+import com.easybook.user.model.User;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/user")
 @RestController
@@ -62,6 +65,33 @@ public class UserRestController {
 			result.put("code", 500);
 			result.put("errorMessage", "회원 추가 실패");
 		}
+		return result;
+	}
+	
+	@PostMapping("/sign_in")
+	public Map<String, Object> signIn(
+			@RequestParam("loginId") String loginId
+			, @RequestParam("password") String password
+			, HttpSession session) {
+		
+		String hashedPassword = EncryptUtils.md5(password);
+		User user = userBO.getUserByLoginIdPassword(loginId, hashedPassword);
+		Map<String, Object> result = new HashMap<>();
+		if (user != null) {
+			result.put("code", 1);
+			result.put("result", "성공");
+			
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
+			session.setAttribute("userNickName", user.getNickname());
+			session.setAttribute("userPostCode", user.getPostCode());
+			session.setAttribute("userAddress", user.getAddress());
+		} else {
+			result.put("code", 500);
+			result.put("errorMessage", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		}
+		
 		return result;
 	}
 	

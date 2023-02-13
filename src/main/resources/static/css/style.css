@@ -13,7 +13,7 @@ a:hover {text-decoration:none; color:#000;}
 .search-category {font-size:small;}
 
 .main-list {background-color:#999; min-height:250px; max-width:950px;}
-.content-box {width:150px;}
+.content-box {width:150px; cursor:pointer;}
 .category-title {max-height:30px; color:#000;}
 .t-form {font-size:15px; font-weight:bold;}
 .i-form {font-size:13px; font-weight:bold; color:#333;}
@@ -30,3 +30,7 @@ a:hover {text-decoration:none; color:#000;}
 .sign-up-box {min-width:900px;}
 .sign-up-title-box {font-size:25px;}
 #emailCheckBtn {margin-left:68px;}
+
+.detail-box {width:950px;}
+.comment-box {width:950px; min-height:100px;}
+.comment-btn {width:60px; height:35px;}

@@ -10,8 +10,22 @@ public class Book {
 	private int priceSales;
 	private String pubDate;
 	private String coverImgUrl;
+	private String description;
+	private int salesPoint;
 	
 	
+	public int getSalesPoint() {
+		return salesPoint;
+	}
+	public void setSalesPoint(int salesPoint) {
+		this.salesPoint = salesPoint;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public int getItemId() {
 		return itemId;
 	}

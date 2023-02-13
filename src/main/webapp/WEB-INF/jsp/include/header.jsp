@@ -22,14 +22,24 @@
 	<div class="d-flex align-items-center">
 		<nav class="mr-2">
 			<ul class="nav">
-				<li class="nav-item"><a href="/user/sign_in_view"
-					class="nav-link px-1 menu2 text-white">로그인</a></li>
-				<li class="nav-item"><a href="/user/sign_up_view"
-					class="nav-link px-1 menu2 text-white">회원가입</a></li>
-				<li class="nav-item"><a href="#"
-					class="nav-link px-1 menu2 text-white">마이페이지</a></li>
-				<li class="nav-item"><a href="#"
-					class="nav-link px-1 menu2 text-white">장바구니</a></li>
+				<c:choose>
+					<c:when test="${not empty userId}">
+						<li class="nav-item"><a href="/user/sign_out"
+							class="nav-link px-1 menu2 text-white">로그아웃</a></li>
+						<li class="nav-item"><a href="#"
+							class="nav-link px-1 menu2 text-white">${userNickName}님 안녕하세요</a></li>
+						<li class="nav-item"><a href="#"
+							class="nav-link px-1 menu2 text-white">장바구니</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a href="/user/sign_in_view"
+							class="nav-link px-1 menu2 text-white">로그인</a></li>
+						<li class="nav-item"><a href="/user/sign_up_view"
+							class="nav-link px-1 menu2 text-white">회원가입</a></li>
+						<li class="nav-item"><a href="#"
+							class="nav-link px-1 menu2 text-white">장바구니</a></li>
+					</c:otherwise>
+				</c:choose>
 				<li class="nav-item"><a href="#"
 					class="nav-link px-1 menu2 text-white">고객센터</a></li>
 			</ul>

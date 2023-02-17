@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.easybook.comment.dao.CommentDAO">
+ 	<insert id="insertComment" parameterType="map">
+ 		INSERT INTO `comment`
+ 		(
+ 			`userId`
+			, `itemId`
+			, `comment`
+			, `rating`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{itemId}
+ 			, #{comment}
+ 			, #{rating}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectCommentListByItemId" resultType="com.easybook.comment.model.Comment">
+ 		SELECT
+	 		`id`
+			, `userId`
+			, `itemId`
+			, `comment`
+			, `rating`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`itemId` = #{itemId}
+ 	</select>
+ 	
+ 	<update id="updateCommentByIdUserIdItemId" parameterType="map">
+ 		UPDATE
+ 			`comment`
+ 		SET
+ 			`comment` = #{comment}
+ 			, `rating` = #{rating}
+ 			, `updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{commentId}
+ 			AND `userId` = #{userId}
+ 			AND `itemId` = #{itemId}
+ 	</update>
+ 	
+ 	<delete id="deleteCommentByIdUserIdItemId" parameterType="map">
+ 		DELETE FROM `comment`
+ 		WHERE
+ 			`id` = #{commentId}
+ 			AND `userId` = #{userId}
+ 			AND `itemId` = #{itemId}
+ 	</delete>
+ </mapper>

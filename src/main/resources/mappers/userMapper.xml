@@ -60,4 +60,23 @@
 			`loginId` = #{loginId}
 			AND `password` = #{password}
  	</select>
+ 	
+ 	<select id="selectUserById" resultType="com.easybook.user.model.User">
+ 		SELECT
+ 			`id`
+			, `name`
+			, `loginId`
+			, `password`
+			, `nickname`
+			, `email`
+			, `phoneNumber`
+			, `postCode`
+			, `address`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`id` = #{id}
+ 	</select>
  </mapper>

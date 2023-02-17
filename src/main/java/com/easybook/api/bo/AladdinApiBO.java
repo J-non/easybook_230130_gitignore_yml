@@ -186,7 +186,7 @@ public class AladdinApiBO {
 		return bookList;
 	}
 	
-	public Book detailBook(String itemId) {
+	public Book detailBook(int itemId) {
 		Book book = new Book();
 		
 		try {

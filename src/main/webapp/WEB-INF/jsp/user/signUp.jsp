@@ -212,7 +212,7 @@
 			
 			const testEmail = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
 			const testPassword = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-			const testPhoneNumber = /^[0-9]$/;
+			const testPhoneNumber = /^[0-9]+$/;
 			
 			let name = $('input[name=name]').val().trim();
 			let loginId = $('input[name=loginId]').val().trim();

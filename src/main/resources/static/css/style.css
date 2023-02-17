@@ -34,3 +34,9 @@ a:hover {text-decoration:none; color:#000;}
 .detail-box {width:950px;}
 .comment-box {width:950px; min-height:100px;}
 .comment-btn {width:60px; height:35px;}
+
+.table {width:900px;}
+thead {height:30px;}
+
+.cart-box {width:900px;}
+.cart-box2 {width:250px;}

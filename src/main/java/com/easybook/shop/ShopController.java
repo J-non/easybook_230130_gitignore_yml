@@ -24,7 +24,7 @@ public class ShopController {
 	@Autowired
 	private CommentBO commentBO;
 	
-	@GetMapping("detail_view")
+	@GetMapping("/detail_view")
 	public String detailView(
 			Model model
 			, @RequestParam("itemId") int itemId) {
@@ -35,6 +35,14 @@ public class ShopController {
 		
 		List<CommentView> commentViewList = commentBO.generateCommentViewByItemId(itemId);
 		model.addAttribute("commentViewList", commentViewList);
+		
+		return "template/layout";
+	}
+	
+	@GetMapping("/cart_view")
+	public String cartView(
+			Model model) {
+		model.addAttribute("viewName", "shop/cart");
 		
 		return "template/layout";
 	}

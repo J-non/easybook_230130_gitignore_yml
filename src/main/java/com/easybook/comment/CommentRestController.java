@@ -78,6 +78,13 @@ public class CommentRestController {
 		return result;
 	}
 	
+	/**
+	 * 댓글 삭제 API
+	 * @param commentId
+	 * @param itemId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> deleteComment(
 			@RequestParam("commentId") int commentId

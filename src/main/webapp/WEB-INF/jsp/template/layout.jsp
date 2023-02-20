@@ -26,7 +26,7 @@
 		
 		<section>
 			<c:choose>
-				<c:when test="${fn:contains(viewName, 'user')}">
+				<c:when test="${fn:contains(viewName, 'user') || fn:contains(viewName, 'non')}">
 					<jsp:include page="../${viewName}.jsp" />
 				</c:when>
 				<c:otherwise>

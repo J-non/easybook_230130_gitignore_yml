@@ -47,4 +47,11 @@ public class ShopController {
 		return "template/layout";
 	}
 	
+	@GetMapping("/order_view")
+	public String orderView(
+			Model model) {
+		model.addAttribute("viewName", "shop/order");
+		
+		return "template/layout";
+	}
 }

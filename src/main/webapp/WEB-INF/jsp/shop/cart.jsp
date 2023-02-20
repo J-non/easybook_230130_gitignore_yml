@@ -16,7 +16,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="border-0 p-0">
+				<td class="cart-box3 d-flex justify-content-center align-items-center border-0 p-0">
 					<input type="checkbox">
 				</td>
 				<td class="border-0 p-0">
@@ -27,15 +27,15 @@
 						</div>
 					</div>
 				</td>
-				<td class="border-0 p-0">
+				<td class="cart-box3 d-flex justify-content-center align-items-center border-0 p-0">
 					<div>12,123원</div>
 				</td>
 				<td class="border-0 p-0">
-					<div class="d-flex justify-content-center align-items-center">
-						<input type="number" class="form-control col-6 p-0" value="1" min="1" max="50">
+					<div class="cart-box3 d-flex justify-content-center align-items-center">
+						<input type="number" class="form-control col-3 p-0" value="1" min="1" max="50">
 					</div>
 				</td>
-				<td class="border-0 p-0">
+				<td class="cart-box3 d-flex justify-content-center align-items-center border-0 p-0">
 					<button type="button" class="btn btn-danger">삭제</button>
 				</td>
 			</tr>

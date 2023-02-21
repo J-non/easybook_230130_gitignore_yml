@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.easybook.product.dao.ProductDAO">
+ 	<select id="existProduct" resultType="boolean">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`product`
+ 		WHERE
+ 			`itemId` = #{itemId}
+ 	</select>
+ 	
+ 	<insert id="insertProduct" parameterType="map">
+ 		INSERT INTO `product`
+ 		(
+ 			`itemId`
+			, `title`
+			, `author`
+			, `publisher`
+			, `priceStandard`
+			, `priceSales`
+			, `pubDate`
+			, `coverImgUrl`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{itemId}
+ 			, #{title}
+ 			, #{author}
+ 			, #{publisher}
+ 			, #{priceStandard}
+ 			, #{priceSales}
+ 			, #{pubDate}
+ 			, #{coverImgUrl}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectProductByItemId" resultType="com.easybook.product.model.Product">
+ 		SELECT
+ 			`id`
+			, `itemId`
+			, `title`
+			, `author`
+			, `publisher`
+			, `priceStandard`
+			, `priceSales`
+			, `pubDate`
+			, `coverImgUrl`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`product`
+		WHERE
+			`itemId` = #{itemId}
+ 	</select>
+ </mapper>

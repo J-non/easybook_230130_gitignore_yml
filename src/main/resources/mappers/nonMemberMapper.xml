@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.easybook.non_member.dao.NonMemberDAO">
+ 	<select id="existEmail" parameterType="string" resultType="boolean">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`non_member`
+ 		WHERE
+ 			`email` = #{email}
+ 	</select>
+ 	
+ 	<insert id="addNonMember" parameterType="map">
+ 		INSERT INTO `non_member`
+ 		(
+ 			`email`
+			, `name`
+			, `password`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{email}
+ 			, #{name}
+ 			, #{password}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectNonMemberByEmailPassword" parameterType="map" resultType="com.easybook.non_member.model.NonMember">
+ 		SELECT
+ 			`id`
+			, `email`
+			, `name`
+			, `password`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`non_member`
+		WHERE
+			`email` = #{email}
+			AND `password` = #{password}
+ 	</select>
+ </mapper>

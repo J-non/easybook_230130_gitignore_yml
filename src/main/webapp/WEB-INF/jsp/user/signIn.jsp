@@ -26,7 +26,7 @@
 				<a href="#">비밀번호 찾기</a>
 			</div>
 			<div class="d-flex justify-content-center my-3 pb-3">
-				<button type="button" id="signUpBtn" class="btn btn-dark text-white col-11">회원가입</button>
+				<a href="/user/sign_up_view"><button type="button" id="signUpBtn" class="btn btn-dark text-white">회원가입</button></a>
 			</div>
 		</div>
 		<!-- 비회원 주문조회 -->
@@ -48,7 +48,7 @@
 				<a href="#">비밀번호 찾기</a>
 			</div>
 			<div class="d-flex justify-content-center my-3 pb-3">
-				<button type="button" id="nMSignUpBtn" class="btn btn-dark text-white col-11">비회원 주문하기</button>
+				<a href="/non_member/sign_up_view"><button type="button" id="nMSignUpBtn" class="btn btn-dark text-white">비회원 주문하기</button></a>
 			</div>
 		</div>
 	</div>
@@ -71,11 +71,6 @@
 				$('#member').addClass('d-none');
 			}
 		});	// 회원 로그인, 비회원 주문조회 끝
-		
-		// signUpBtn 클릭 시 회원가입 페이지로
-		$('#signUpBtn').on('click', function() {
-			location.href = "/user/sign_up_view"
-		}); // signUpBtn 클릭 시 회원가입 페이지로 끝
 		
 		// loginBtn 로그인
 		$('#loginBtn').on('click', function() {

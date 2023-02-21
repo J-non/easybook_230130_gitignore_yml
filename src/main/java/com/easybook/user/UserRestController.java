@@ -52,11 +52,11 @@ public class UserRestController {
 			, @RequestParam("postCode") String postCode
 			, @RequestParam("address") String address
 			, @RequestParam("detailAddress") String detailAddress) {
-		String email1 = email + "@" + domain;
+		String emailAddress = email + "@" + domain;
 		String address1 = address + " " + detailAddress;
 		String hashedPassword = EncryptUtils.md5(password);
 		
-		int row = userBO.addUser(name, loginId, hashedPassword, email1, phoneNumber, postCode, address1);
+		int row = userBO.addUser(name, loginId, hashedPassword, emailAddress, phoneNumber, postCode, address1);
 		Map<String, Object> result = new HashMap<>();
 		if (row > 0) {
 			result.put("code", 1);

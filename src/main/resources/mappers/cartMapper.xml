@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.easybook.cart.dao.CartDAO">
+ 	
+ 	<insert id="insertCart" parameterType="map">
+ 		INSERT INTO `cart`
+ 		(
+ 			`userId`
+			, `nonMemberId`
+			, `productId`
+			, `productCount`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{nonMemberId}
+ 			, #{productId}
+ 			, #{productCount}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="existCartByUserIDNonMemberIDProductId" resultType="boolean">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`cart`
+ 		WHERE
+ 			<if test="userId != null">
+				`userId` = #{userId}
+			</if>
+			<if test="nonMemberId != null">
+				`nonMemberId` = #{nonMemberId}
+			</if>
+ 			AND `productId` = #{productId}
+ 	</select>
+ 	
+ 	<select id="selectCartByUserIDNonMemberIDProductId" parameterType="map" resultType="com.easybook.cart.model.Cart">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nonMemberId`
+			, `productId`
+			, `productCount`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`cart`
+		WHERE
+			<if test="userId != null">
+				`userId` = #{userId}
+			</if>
+			<if test="nonMemberId != null">
+				`nonMemberId` = #{nonMemberId}
+			</if>
+			AND `productId` = #{productId}
+ 	</select>
+ 	
+ 	<update id="updateCartByUserIDNonMemberIDProductId" parameterType="map">
+ 		UPDATE
+ 			`cart`
+ 		SET
+ 			`productCount` = #{productCount}
+ 		WHERE
+ 			<if test="userId != null">
+				`userId` = #{userId}
+			</if>
+			<if test="nonMemberId != null">
+				`nonMemberId` = #{nonMemberId}
+			</if>
+			AND `productId` = #{productId}
+ 	</update>
+ </mapper>

@@ -10,6 +10,14 @@
 	</div>
 	<!-- 책 정보 -->
 	<div id="itemId" class="d-none" data-item-id="${book.itemId}"></div>
+	<div id="productData" class="d-none"
+		data-title="${book.title}"
+		data-author="${book.author}"
+		data-publisher="${book.publisher}"
+		data-pub-date="${book.pubDate}"
+		data-price-standard="${book.priceStandard}"
+		data-price-sales="${book.priceSales}"
+		data-cover-img-url="${book.coverImgUrl}"></div>
 	<div class="col-6 p-0 detail-box">
 		<div>
 			<h3 class="m-0">${book.title}</h3>
@@ -133,24 +141,25 @@
 			varStatus="status">
 			<div class="d-flex align-items-start mt-2">
 				<div class="col-2 ml-4 p-0">${commentView.user.nickname}</div>
-				
+
 				<div id="${status.count}A" class="col-1 mx-2 p-0">${commentView.comment.rating}</div>
-				
+
 				<input id="${status.count}B" type="text"
 					class="reRating form-control col-1 mx-2 p-0 d-none">
-					
+
 				<div id="${status.count}C" class="col-4 mx-2 p-0">${commentView.comment.comment}</div>
-				
+
 				<textarea id="${status.count}D"
 					class="updateComment form-control col-4 mx-2 p-0 d-none" rows="2"></textarea>
-					
+
 				<div class="col-2 mx-2 p-0">
 					<fmt:formatDate value="${commentView.comment.updatedAt}"
 						pattern="yyyy-MM-dd" />
 				</div>
-				
-				<div id="${status.count}F" class="d-none" data-comment-id="${commentView.comment.id}"></div>
-				
+
+				<div id="${status.count}F" class="d-none"
+					data-comment-id="${commentView.comment.id}"></div>
+
 				<c:if test="${userId eq commentView.user.id}">
 					<button type="button"
 						class="commentUpdateBtn btn btn-dark comment-btn ml-3"
@@ -411,8 +420,7 @@
 							if (rating <= 5) {
 								if (!checkrating3.test(rating)) {
 									$(this).val(
-											parseFloat(
-													$(this).val().trim())
+											parseFloat($(this).val().trim())
 													.toFixed(1));
 									return;
 								}
@@ -421,8 +429,8 @@
 								$(this).val("");
 								return;
 							}
-						});	// 평점 수정 0.0 ~ 5.0 제한 끝
-				
+						}); // 평점 수정 0.0 ~ 5.0 제한 끝
+
 				// 댓글 수정 글자 수 제한
 				$('.updateComment').on('keyup', function() {
 					let comment = $(this).val().trim();
@@ -433,24 +441,100 @@
 						return;
 					}
 				}); // 댓글 수정 글자 수 제한 끝
-				
+
 				// 적용 버튼 클릭 시 댓글, 평점 수정
-				$('.commitBtn').on('click', function() {
-					let countA = $(this).data('status-count-a');
-					let countB = $(this).data('status-count-b');
-					let countC = $(this).data('status-count-c');
-					let countD = $(this).data('status-count-d');
-					let countF = $(this).data('status-count-f');
-					
-					let commentId = $('div[id=' + countF + ']').data('comment-id');
+				$('.commitBtn').on(
+						'click',
+						function() {
+							let countA = $(this).data('status-count-a');
+							let countB = $(this).data('status-count-b');
+							let countC = $(this).data('status-count-c');
+							let countD = $(this).data('status-count-d');
+							let countF = $(this).data('status-count-f');
+
+							let commentId = $('div[id=' + countF + ']').data(
+									'comment-id');
+							let itemId = $('#itemId').data('item-id');
+							let rating = $('input[id=' + countB + ']').val()
+									.trim();
+							let comment = $('textarea[id=' + countD + ']')
+									.val().trim();
+
+							$.ajax({
+								type : "post",
+								url : "/comment/update",
+								data : {
+									"commentId" : commentId,
+									"itemId" : itemId,
+									"rating" : rating,
+									"comment" : comment
+								}
+
+								,
+								success : function(data) {
+									if (data.code == 1) {
+										location.reload();
+									} else {
+										alert(data.errorMessage);
+									}
+								},
+								error : function(e) {
+									alert("댓글 및 평점 수정 실패");
+								}
+							});
+						}); // 적용 버튼 클릭 시 댓글, 평점 수정 끝
+
+				// 댓글 삭제
+				$('.commentDeleteBtn').on(
+						'click',
+						function() {
+							let countF = $(this).data('status-count-f');
+
+							let commentId = $('div[id=' + countF + ']').data(
+									'comment-id');
+							let itemId = $('#itemId').data('item-id');
+
+							$.ajax({
+								type : "delete",
+								url : "/comment/delete",
+								data : {
+									"commentId" : commentId,
+									"itemId" : itemId
+								}
+
+								,
+								success : function(data) {
+									if (data.code == 1) {
+										location.reload();
+									} else {
+										alert(data.errorMessage);
+									}
+								},
+								error : function(e) {
+									alert("댓글 삭제 실패");
+								}
+							});
+						}); // 댓글 삭제 끝
+						
+				// 장바구니 버튼
+				$('#cartBtn').on('click', function() {
 					let itemId = $('#itemId').data('item-id');
-					let rating = $('input[id=' + countB + ']').val().trim();
-					let comment = $('textarea[id=' + countD + ']').val().trim();
+					let title = $('#productData').data('title');
+					let author = $('#productData').data('author');
+					let publisher = $('#productData').data('publisher');
+					let pubDate = $('#productData').data('pub-date');
+					let priceStandard = $('#productData').data('price-standard');
+					let priceSales = $('#productData').data('price-sales');
+					let coverImgUrl = $('#productData').data('cover-img-url');
+					
+					let productCount = $('#productCount').val().trim();
 					
 					$.ajax({
 						type:"post"
-						, url:"/comment/update"
-						, data:{"commentId":commentId, "itemId":itemId, "rating":rating, "comment":comment}
+						, url:"/cart/create"
+						, data:{"itemId":itemId, "title":title, "author":author, "publisher":publisher,
+							"pubDate":pubDate, "priceStandard":priceStandard, "priceSales":priceSales,
+							"coverImgUrl":coverImgUrl, "productCount":productCount}
 					
 						, success:function(data) {
 							if (data.code == 1) {
@@ -460,35 +544,43 @@
 							}
 						}
 						, error:function(e) {
-							alert("댓글 및 평점 수정 실패");
+							alert("장바구니 생성 실패.");
 						}
 					});
-				});	// 적용 버튼 클릭 시 댓글, 평점 수정 끝
+				}); // 장바구니 버튼 끝
 				
-				// 댓글 삭제
-				$('.commentDeleteBtn').on('click', function() {
-					let countF = $(this).data('status-count-f');
-					
-					let commentId = $('div[id=' + countF + ']').data('comment-id');
+				// 바로구매 버튼
+				$('#buyBtn').on('click', function() {
 					let itemId = $('#itemId').data('item-id');
+					let title = $('#productData').data('title');
+					let author = $('#productData').data('author');
+					let publisher = $('#productData').data('publisher');
+					let pubDate = $('#productData').data('pub-date');
+					let pricrStandard = $('#productData').data('price-standard');
+					let priceSales = $('#productData').data('price-sales');
+					let coverImgUrl = $('#productData').data('cover-img-url');
+					
+					let productCount = $('#productCount').val().trim();
 					
 					$.ajax({
-						type:"delete"
-						, url:"/comment/delete"
-						, data:{"commentId":commentId, "itemId":itemId}
+						type:"post"
+						, url:""
+						, data:{"itemId":itemId, "title":title, "author":author, "publisher":publisher,
+							"pubDate":pubDate, "pricrStandard":pricrStandard, "priceSales":priceSales,
+							"coverImgUrl":coverImgUrl, "productCount":productCount}
 					
 						, success:function(data) {
 							if (data.code == 1) {
-								location.reload();
+								location.href = "/shop/order_view";
 							} else {
 								alert(data.errorMessage);
 							}
 						}
 						, error:function(e) {
-							alert("댓글 삭제 실패");
+							alert("장바구니 생성 실패.");
 						}
 					});
-				});
-				
+				}); // 바로구매 버튼 끝
+						
 			});
 </script>

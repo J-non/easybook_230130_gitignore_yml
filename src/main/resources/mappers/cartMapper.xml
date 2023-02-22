@@ -40,6 +40,26 @@
  			AND `productId` = #{productId}
  	</select>
  	
+ 	<select id="selectCartListByUserIDNonMemberID" parameterType="map" resultType="com.easybook.cart.model.Cart">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nonMemberId`
+			, `productId`
+			, `productCount`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`cart`
+		WHERE
+			<if test="userId != null">
+				`userId` = #{userId}
+			</if>
+			<if test="nonMemberId != null">
+				`nonMemberId` = #{nonMemberId}
+			</if>
+ 	</select>
+ 	
  	<select id="selectCartByUserIDNonMemberIDProductId" parameterType="map" resultType="com.easybook.cart.model.Cart">
  		SELECT
  			`id`

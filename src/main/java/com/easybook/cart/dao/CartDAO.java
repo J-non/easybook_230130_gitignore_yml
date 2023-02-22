@@ -1,5 +1,7 @@
 package com.easybook.cart.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +20,10 @@ public interface CartDAO {
 			@Param("userId") Integer userId,
 			@Param("nonMemberId") Integer nonMemberId,
 			@Param("productId") int productId);
+	
+	public List<Cart> selectCartListByUserIDNonMemberID(
+			@Param("userId") Integer userId,
+			@Param("nonMemberId") Integer nonMemberId);
 	
 	public Cart selectCartByUserIDNonMemberIDProductId(
 			@Param("userId") Integer userId,

@@ -28,8 +28,11 @@ public class ProductBO {
 		productDAO.insertProduct(itemId, title, author, publisher, priceStandard, priceSales, pubDate, coverImgUrl);
 	}
 	
+	public Product getProductById(int productId) {
+		return productDAO.selectProductById(productId);
+	}
+
 	public Product getProductByItemId(int itemId) {
 		return productDAO.selectProductByItemId(itemId);
 	}
-
 }

@@ -59,4 +59,24 @@
 		WHERE
 			`itemId` = #{itemId}
  	</select>
+ 	
+ 	<select id="selectProductById" resultType="com.easybook.product.model.Product">
+ 		SELECT
+ 			`id`
+			, `itemId`
+			, `title`
+			, `author`
+			, `publisher`
+			, `priceStandard`
+			, `priceSales`
+			, `pubDate`
+			, `coverImgUrl`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`product`
+		WHERE
+			`id` = #{productId}
+ 	</select>
+ 	
  </mapper>

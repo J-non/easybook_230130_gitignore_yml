@@ -28,10 +28,14 @@
 							class="nav-link px-1 menu2 text-white">로그아웃</a></li>
 						<li class="nav-item"><a href="#"
 							class="nav-link px-1 menu2 text-white">${userNickName}님 안녕하세요</a></li>
+						<li class="nav-item"><a href="/shop/cart_view"
+							class="nav-link px-1 menu2 text-white">장바구니</a></li>
 					</c:when>
 					<c:when test="${not empty nonMemberEmail}">
 						<li class="nav-item"><a href="/non_member/sign_out"
 							class="nav-link px-1 menu2 text-white">접속해지</a></li>
+						<li class="nav-item"><a href="/shop/cart_view"
+							class="nav-link px-1 menu2 text-white">장바구니</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item"><a href="/user/sign_in_view"
@@ -40,8 +44,6 @@
 							class="nav-link px-1 menu2 text-white">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
-				<li class="nav-item"><a href="#"
-					class="nav-link px-1 menu2 text-white">장바구니</a></li>
 				<li class="nav-item"><a href="#"
 					class="nav-link px-1 menu2 text-white">고객센터</a></li>
 			</ul>

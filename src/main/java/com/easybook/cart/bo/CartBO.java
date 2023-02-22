@@ -1,5 +1,7 @@
 package com.easybook.cart.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class CartBO {
 	
 	public boolean existCartByUserIDNonMemberIDProductId(Integer userId, Integer nonMemberId, int productId) {
 		return cartDAO.existCartByUserIDNonMemberIDProductId(userId, nonMemberId, productId);
+	}
+	
+	public List<Cart> getCartListByUserIDNonMemberID(Integer userId, Integer nonMemberId) {
+		return cartDAO.selectCartListByUserIDNonMemberID(userId, nonMemberId);
 	}
 	
 	public Cart getCartByUserIDNonMemberIDProductId(Integer userId, Integer nonMemberId, int productId) {

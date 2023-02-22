@@ -13,6 +13,10 @@ import com.easybook.api.bo.AladdinApiBO;
 import com.easybook.api.model.Book;
 import com.easybook.comment.bo.CommentBO;
 import com.easybook.comment.model.CommentView;
+import com.easybook.shop.bo.ShopBO;
+import com.easybook.shop.model.CartView;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/shop")
 @Controller
@@ -23,6 +27,9 @@ public class ShopController {
 	
 	@Autowired
 	private CommentBO commentBO;
+	
+	@Autowired
+	private ShopBO shopBO;
 	
 	@GetMapping("/detail_view")
 	public String detailView(
@@ -41,8 +48,20 @@ public class ShopController {
 	
 	@GetMapping("/cart_view")
 	public String cartView(
-			Model model) {
+			Model model
+			, HttpSession session) {
 		model.addAttribute("viewName", "shop/cart");
+		Integer userId = null;
+		Integer nonMemberId = null;
+		if ((Integer)session.getAttribute("userId") != null) {
+			userId = (Integer)session.getAttribute("userId");
+		}
+		if ((Integer)session.getAttribute("nonMemberId") != null) {
+			userId = (Integer)session.getAttribute("usernonMemberIdId");
+		}
+		
+		List<CartView> cartViewList = shopBO.generateCartViewList(userId, nonMemberId);
+		model.addAttribute("cartViewList", cartViewList);
 		
 		return "template/layout";
 	}

@@ -7,7 +7,7 @@ public class Cart {
 	private int id;
 	private int userId;
 	private int nonMemberId;
-	private int porductId;
+	private int productId;
 	private int productCount;
 	private Date createdAt;
 	private Date updatedAt;
@@ -31,11 +31,11 @@ public class Cart {
 	public void setNonMemberId(int nonMemberId) {
 		this.nonMemberId = nonMemberId;
 	}
-	public int getPorductId() {
-		return porductId;
+	public int getProductId() {
+		return productId;
 	}
-	public void setPorductId(int porductId) {
-		this.porductId = porductId;
+	public void setProductId(int porductId) {
+		this.productId = porductId;
 	}
 	public int getProductCount() {
 		return productCount;

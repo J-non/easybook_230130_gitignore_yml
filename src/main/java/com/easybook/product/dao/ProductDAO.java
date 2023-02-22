@@ -20,6 +20,8 @@ public interface ProductDAO {
 			@Param("pubDate") String pubDate,
 			@Param("coverImgUrl") String coverImgUrl);
 	
+	public Product selectProductById(int productId);
+	
 	public Product selectProductByItemId(int itemId);
 	
 }

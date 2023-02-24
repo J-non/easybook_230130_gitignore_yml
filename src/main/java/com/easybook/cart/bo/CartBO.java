@@ -26,6 +26,14 @@ public class CartBO {
 		return cartDAO.selectCartListByUserIDNonMemberID(userId, nonMemberId);
 	}
 	
+	public List<Cart> getCartListById(List<Integer> cartIdList) {
+		return cartDAO.selectCartListById(cartIdList);
+	}
+	
+	public List<Cart> getCartListByIdUserIDNonMemberID(Integer cartId, Integer userId, Integer nonMemberId) {
+		return cartDAO.selectCartListByIdUserIDNonMemberID(cartId, userId, nonMemberId);
+	}
+	
 	public Cart getCartByUserIDNonMemberIDProductId(Integer userId, Integer nonMemberId, int productId) {
 		return cartDAO.selectCartByUserIDNonMemberIDProductId(userId, nonMemberId, productId);
 	}
@@ -34,4 +42,17 @@ public class CartBO {
 		return cartDAO.updateCartByUserIDNonMemberIDProductId(userId, nonMemberId, productId, productCount);
 	}
 	
+	public void updateCartByIdUserIDNonMemberID(Integer cartId, Integer userId, Integer nonMemberId, int productCount) {
+		cartDAO.updateCartByUserIDNonMemberIDProductId(cartId, userId, nonMemberId, productCount);
+	}
+	
+	// 선택 삭제
+	public int deleteCartById(int id) {
+		return cartDAO.deleteCartById(id);
+	}
+	
+	// 장바구니 비우기
+	public int deleteCartByUserIdNonMemberId(Integer userId, Integer nonMemberId) {
+		return cartDAO.deleteCartByUserIdNonMemberId(userId, nonMemberId);
+	}
 }

@@ -25,6 +25,14 @@ public interface CartDAO {
 			@Param("userId") Integer userId,
 			@Param("nonMemberId") Integer nonMemberId);
 	
+	public List<Cart> selectCartListById(
+			@Param("cartIdList") List<Integer> cartIdList);
+	
+	public List<Cart> selectCartListByIdUserIDNonMemberID(
+			@Param("cartId") Integer cartId,
+			@Param("userId") Integer userId,
+			@Param("nonMemberId") Integer nonMemberId);
+	
 	public Cart selectCartByUserIDNonMemberIDProductId(
 			@Param("userId") Integer userId,
 			@Param("nonMemberId") Integer nonMemberId,
@@ -36,4 +44,15 @@ public interface CartDAO {
 			@Param("productId") int productId,
 			@Param("productCount") int productCount);
 	
+	public void updateCartByIdUserIDNonMemberID(
+			@Param("cartId") Integer cartId,
+			@Param("userId") Integer userId,
+			@Param("nonMemberId") Integer nonMemberId,
+			@Param("productCount") int productCount);
+	
+	public int deleteCartById(int id);
+	
+	public int deleteCartByUserIdNonMemberId(
+			@Param("userId") Integer userId,
+			@Param("nonMemberId") Integer nonMemberId);
 }

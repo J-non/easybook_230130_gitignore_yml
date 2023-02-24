@@ -216,7 +216,13 @@
 
 				// 상품 수량 1 ~ 50 제한
 				$('#productCount').on('keyup', function() {
+					let onlyNum = /[0-9]/; 
 					let productCount = $('#productCount').val().trim();
+					if (!onlyNum.test(productCount)) {
+						alert("숫자만 입력 가능합니다.");
+						$('#productCount').val("1");
+						return;
+					}
 					if (productCount == "0") {
 						alert("상품의 최소수량은 1 입니다.")
 						$('#productCount').val("1");

@@ -60,6 +60,47 @@
 			</if>
  	</select>
  	
+ 	<select id="selectCartListByIdUserIDNonMemberID" parameterType="map" resultType="com.easybook.cart.model.Cart">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nonMemberId`
+			, `productId`
+			, `productCount`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`cart`
+		WHERE
+			<if test="cartId != null">
+				`id` = #{cartId} AND
+			</if>
+			<if test="userId != null">
+				`userId` = #{userId}
+			</if>
+			<if test="nonMemberId != null">
+				`nonMemberId` = #{nonMemberId}
+			</if>
+ 	</select>
+ 	
+ 	<select id="selectCartListById" resultType="com.easybook.cart.model.Cart">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nonMemberId`
+			, `productId`
+			, `productCount`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`cart`
+		WHERE
+			`id` in
+			<foreach item="id" collection="cartIdList" open="(" close=")" separator=",">
+				#{id}
+			</foreach>
+ 	</select>
+ 	
  	<select id="selectCartByUserIDNonMemberIDProductId" parameterType="map" resultType="com.easybook.cart.model.Cart">
  		SELECT
  			`id`
@@ -95,4 +136,36 @@
 			</if>
 			AND `productId` = #{productId}
  	</update>
+ 	
+ 	<update id="updateCartByIdUserIDNonMemberID" parameterType="map">
+ 		UPDATE
+ 			`cart`
+ 		SET
+ 			`productCount` = #{productCount}
+ 		WHERE
+ 			<if test="userId != null">
+				`userId` = #{userId}
+			</if>
+			<if test="nonMemberId != null">
+				`nonMemberId` = #{nonMemberId}
+			</if>
+			AND `id` = #{cartId}
+ 	</update>
+ 	
+ 	<delete id="deleteCartById">
+ 		DELETE FROM `cart`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ 	
+ 	<delete id="deleteCartByUserIdNonMemberId" parameterType="map">
+ 		DELETE FROM `cart`
+ 		WHERE
+ 			<if test="userId != null">
+				`userId` = #{userId}
+			</if>
+			<if test="nonMemberId != null">
+				`nonMemberId` = #{nonMemberId}
+			</if>
+ 	</delete>
  </mapper>

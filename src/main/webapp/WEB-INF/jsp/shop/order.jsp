@@ -12,22 +12,24 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td class="border-0 p-2">
-					1
-				</td>
-				<td class="border-0 p-2">
-					상대적이며 절대적인 고양이 백과사전
-				</td>
-				<td class="border-0 p-2">
-					<div>12,123원</div>
-				</td>
-				<td class="border-0 p-2">
-					<div class="">
-						1권
-					</div>
-				</td>
-			</tr>
+			<c:forEach var="cartView" items="${cartViewList}" varStatus="status">
+				<tr>
+					<td class="border-0 p-2">
+						${status.count}
+					</td>
+					<td class="border-0 p-2">
+						${cartView.product.title}
+					</td>
+					<td class="border-0 p-2">
+						<div>12,123원</div>
+					</td>
+					<td class="border-0 p-2">
+						<div class="">
+							1권
+						</div>
+					</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>

@@ -1,5 +1,7 @@
 package com.easybook.shop;
 
+import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.easybook.api.bo.AladdinApiBO;
 import com.easybook.api.model.Book;
+import com.easybook.cart.bo.CartBO;
 import com.easybook.comment.bo.CommentBO;
 import com.easybook.comment.model.CommentView;
 import com.easybook.shop.bo.ShopBO;
@@ -30,6 +33,9 @@ public class ShopController {
 	
 	@Autowired
 	private ShopBO shopBO;
+	
+	@Autowired
+	private CartBO cartBO;
 	
 	@GetMapping("/detail_view")
 	public String detailView(
@@ -57,9 +63,8 @@ public class ShopController {
 			userId = (Integer)session.getAttribute("userId");
 		}
 		if ((Integer)session.getAttribute("nonMemberId") != null) {
-			userId = (Integer)session.getAttribute("usernonMemberIdId");
+			nonMemberId = (Integer)session.getAttribute("nonMemberId");
 		}
-		
 		List<CartView> cartViewList = shopBO.generateCartViewList(userId, nonMemberId);
 		model.addAttribute("cartViewList", cartViewList);
 		
@@ -68,9 +73,20 @@ public class ShopController {
 	
 	@GetMapping("/order_view")
 	public String orderView(
-			Model model) {
+			Model model
+			, @RequestParam(value="cartIdList[]", required=false) List<Integer> cartIdList1
+			, @RequestParam(value="cartIdList", required=false) List<Integer> cartIdList2
+			, HttpSession session) {
 		model.addAttribute("viewName", "shop/order");
+		List<Integer> cartIdList = new ArrayList<>();
+		if (cartIdList1 != null) {
+			cartIdList = cartIdList1;
+		} else if (cartIdList2 !=null) {
+			cartIdList = cartIdList2;
+		}
 		
+		List<CartView> cartViewList = shopBO.generateCartViewListByCartId(cartIdList);
+		model.addAttribute("cartViewList", cartViewList);
 		return "template/layout";
 	}
 }

@@ -18,7 +18,7 @@
 						<input type="password" id="mPassword" class="form-control" placeholder="비밀번호를 입력하세요">
 					</div>
 				</div>
-				<button type="button" id="loginBtn" class="btn btn-dark text-white font-weight-bold ml-2" >로그인</button>
+				<button type="submit" id="loginBtn" class="btn btn-dark text-white font-weight-bold ml-2" >로그인</button>
 			</div>
 			<div class="d-flex justify-content-center">
 				<a href="#">아이디 찾기</a>
@@ -72,8 +72,21 @@
 			}
 		});	// 회원 로그인, 비회원 주문조회 끝
 		
+		// 엔터키 -> loginBtn
+		$('#loginId').on('keyup', function(e) {
+			if (e.keyCode == 13) {
+				$('#loginBtn').trigger('click');
+			}
+		});
+		
+		$('#mPassword').on('keyup', function(e) {
+			if (e.keyCode == 13) {
+				$('#loginBtn').trigger('click');
+			}
+		});	// 엔터키 -> loginBtn 끝
+		
 		// loginBtn 로그인
-		$('#loginBtn').on('click', function() {
+		$('#loginBtn').on('click', function(e) {
 			let loginId = $('#loginId').val().trim();
 			let password = $('#mPassword').val().trim();
 			

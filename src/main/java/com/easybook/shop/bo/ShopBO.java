@@ -39,4 +39,22 @@ public class ShopBO {
 		return cartViewList;
 	}
 	
+	public List<CartView> generateCartViewListByCartId(List<Integer> cartIdList) {
+		List<CartView> cartViewList = new ArrayList<>();
+		List<Cart> cartList = cartBO.getCartListById(cartIdList);
+		
+		for (Cart cart : cartList) {
+			CartView cartView = new CartView();
+			
+			Product product = productBO.getProductById(cart.getProductId());
+			
+			cartView.setCart(cart);
+			cartView.setProduct(product);
+			
+			cartViewList.add(cartView);
+		}
+		
+		return cartViewList;
+	}
+	
 }

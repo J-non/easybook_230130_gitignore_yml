@@ -1,7 +1,6 @@
 package com.easybook.shop;
 
 import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,8 @@ import com.easybook.comment.bo.CommentBO;
 import com.easybook.comment.model.CommentView;
 import com.easybook.shop.bo.ShopBO;
 import com.easybook.shop.model.CartView;
+import com.easybook.user.bo.UserBO;
+import com.easybook.user.model.User;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -30,6 +31,9 @@ public class ShopController {
 	
 	@Autowired
 	private CommentBO commentBO;
+	
+	@Autowired
+	private UserBO userBO;
 	
 	@Autowired
 	private ShopBO shopBO;
@@ -78,15 +82,39 @@ public class ShopController {
 			, @RequestParam(value="cartIdList", required=false) List<Integer> cartIdList2
 			, HttpSession session) {
 		model.addAttribute("viewName", "shop/order");
+		Integer userId = null;
+		Integer nonMemberId = null;
+		if ((Integer)session.getAttribute("userId") != null) {
+			userId = (Integer)session.getAttribute("userId");
+			User user = userBO.getUserById(userId);
+			model.addAttribute("user", user);
+		}
+		if ((Integer)session.getAttribute("nonMemberId") != null) {
+			nonMemberId = (Integer)session.getAttribute("nonMemberId");
+		}
 		List<Integer> cartIdList = new ArrayList<>();
+		List<CartView> cartViewList = new ArrayList<>();
 		if (cartIdList1 != null) {
 			cartIdList = cartIdList1;
 		} else if (cartIdList2 !=null) {
 			cartIdList = cartIdList2;
+		} else if (cartIdList1 == null && cartIdList2 == null) {
+			cartViewList = shopBO.generateCartViewList(userId, nonMemberId);
+			model.addAttribute("cartViewList", cartViewList);
+			return "template/layout";
 		}
 		
-		List<CartView> cartViewList = shopBO.generateCartViewListByCartId(cartIdList);
+		cartViewList = shopBO.generateCartViewListByCartId(cartIdList);
 		model.addAttribute("cartViewList", cartViewList);
 		return "template/layout";
 	}
+	
+	@GetMapping("/complete_view")
+	public String completeView(
+			Model model) {
+		model.addAttribute("viewName", "shop/orderComplete");
+		
+		return "template/layout";
+	}
+	
 }

@@ -12,6 +12,15 @@
  			`loginId` = #{loginId}
  	</select>
  	
+ 	<select id="exsitEmail" parameterType="string" resultType="boolean">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`email` = #{email}
+ 	</select>
+ 	
  	<insert id="insertUser" parameterType="map">
  		INSERT INTO `user`
  		(
@@ -78,5 +87,25 @@
 			`user`
 		WHERE
 			`id` = #{id}
+ 	</select>
+ 	
+ 	<select id="selectUserByNameEmail" parameterType="map" resultType="com.easybook.user.model.User">
+ 		SELECT
+ 			`id`
+			, `name`
+			, `loginId`
+			, `password`
+			, `nickname`
+			, `email`
+			, `phoneNumber`
+			, `postCode`
+			, `address`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`name` = #{name}
+			AND `email` = #{email}
  	</select>
  </mapper>

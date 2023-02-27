@@ -41,6 +41,24 @@ public class UserRestController {
 		return result;
 	}
 	
+	@GetMapping("/is_duplicated_email")
+	public Map<String, Object> isDuplicatedEmail(
+			@RequestParam("emailAddress") String emailAddress) {
+		
+		boolean isDuplicated = userBO.existEmail(emailAddress);
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		if (isDuplicated) {
+			result.put("code", 1);
+			result.put("result", true);
+		} else {
+			result.put("code", 1);
+			result.put("result", false);
+		}
+		return result;
+	}
+	
 	@PostMapping("/sign_up")
 	public Map<String, Object> addUser(
 			@RequestParam("name") String name
@@ -92,6 +110,22 @@ public class UserRestController {
 			result.put("errorMessage", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
 		
+		return result;
+	}
+	
+	@PostMapping("/find_login_id")
+	public Map<String, Object> findLoginId(
+			@RequestParam("name") String name
+			, @RequestParam("email") String email) {
+		Map<String, Object> result = new HashMap<>();
+		User user = userBO.getUserByNameEmail(name, email);
+		if (user != null) {
+			result.put("code", 1);
+			result.put("loginId", user.getLoginId());
+		} else {
+			result.put("code", 500);
+			result.put("errorMessage", "존재하지 않는 사용자 입니다.");
+		}
 		return result;
 	}
 	

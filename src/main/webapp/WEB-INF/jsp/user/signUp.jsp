@@ -56,10 +56,10 @@
 					<!-- 이메일 -->
 					<div class="d-flex mt-3 p-0">
 						<div class="d-flex">
-							<div class="d-flex align-items-center col-3"><!-- mr-3 -->
+							<div class="d-flex align-items-center col-3 mr-3"><!-- mr-3 -->
 								이메일
 							</div>
-							<input type="text" name="email" class="form-control col-3"><!-- ml-4 -->
+							<input type="text" name="email" class="form-control col-3 ml-4"><!-- ml-4 -->
 							<div class="d-flex align-items-center">
 								<div>@</div>
 							</div>
@@ -71,17 +71,17 @@
 								<option value="daum.net">daum.net</option>
 							</select>
 						</div>
-					<!-- <button type="button" id="emailCheckBtn" class="btn btn-dark">중복확인</button> -->
+					<button type="button" id="emailCheckBtn" class="btn btn-dark">중복확인</button>
 					</div>
 					
 					<%-- 이메일 체크 결과 --%>
-					<!-- <div class="d-flex">
+					<div class="d-flex">
 						<div class="col-3"></div>
 						<div class="col-7 p-0">
-							<div id="idCheckDuplicated" class="small text-danger d-none">이미 사용중인 이메일 입니다.</div>
-							<div id="idCheckOk" class="small text-success d-none">사용이 가능합니다.</div>
+							<div id="emailCheckDuplicated" class="small text-danger d-none">이미 사용중인 이메일 입니다.</div>
+							<div id="emailCheckOk" class="small text-success d-none">사용이 가능합니다.</div>
 						</div>
-					</div> -->
+					</div>
 					
 					<!-- 전화번호 -->
 					<div class="d-flex mt-3 p-0">
@@ -187,10 +187,51 @@
 					}
 				}
 				, error:function(e) {
-					alert("중복 확인에 실패했습니다.");
+					alert("아이디 중복 확인에 실패했습니다.");
 				}
 			});
 		});	// 아이디 중복체크 끝
+		
+		// 이메일 중복체크
+		$('#emailCheckBtn').on('click', function() {
+			let email = $('input[name=email]').val().trim();
+			let domain = $('input[name=domain]').val().trim();
+			let emailAddress = email + "@" + domain;
+			
+			
+			$('#emailCheckOk').addClass('d-none');
+			$('#emailCheckDuplicated').addClass('d-none');
+			
+			if (email == "") {
+				alert("이메일 주소를 입력해주세요.");
+				return;
+			}
+			
+			if (domain == "") {
+				alert("이메일 주소를 입력해주세요.");
+				return;
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/user/is_duplicated_email"
+				, data:{"emailAddress":emailAddress}
+			
+				, success:function(data) {
+					if (data.code == 1) {
+						if (data.result) {
+							$('#emailCheckDuplicated').removeClass('d-none');
+						} else {
+							$('#emailCheckOk').removeClass('d-none');
+						}
+					}
+				}
+				, error:function(e) {
+					alert("이메일 중복 확인에 실패했습니다.");
+				}
+			});
+			
+		});
 		
 		// 도메인 value 변경
 		$('#domain').on('change', function() {
@@ -290,11 +331,17 @@
 				return false;
 			}
 			
+			if($('#emailCheckOk').hasClass('d-none')) {
+				alert("이메일 중복체크를 다시 해주세요.");
+				return false;
+			}
+			
 			if (postCode == "") {
 				$('input[name=postCode]').val("");
 				$('input[name=address]').val("");
 				$('input[name=detailAddress]').val("");
 			}
+			
 			
 			let url = $(this).attr('action');
 			let params = $(this).serialize();

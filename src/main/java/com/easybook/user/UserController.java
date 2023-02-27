@@ -36,4 +36,16 @@ public class UserController {
 		return "redirect:/main/home";
 	}
 	
+	@GetMapping("/find_login_id_view")
+	public String findLoginIdView(Model model) {
+		model.addAttribute("viewName", "user/findLoginId");
+		return "template/layout";
+	}
+	
+	@GetMapping("/find_password_view")
+	public String findPasswordView(Model model) {
+		model.addAttribute("viewName", "user/findPassword");
+		return "template/layout";
+	}
+	
 }

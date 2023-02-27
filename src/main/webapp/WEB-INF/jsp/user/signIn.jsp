@@ -21,9 +21,9 @@
 				<button type="submit" id="loginBtn" class="btn btn-dark text-white font-weight-bold ml-2" >로그인</button>
 			</div>
 			<div class="d-flex justify-content-center">
-				<a href="#">아이디 찾기</a>
+				<a href="/user/find_login_id_view">아이디 찾기</a>
 				<span class="mx-3">l</span>
-				<a href="#">비밀번호 찾기</a>
+				<a href="/user/find_password_view">비밀번호 찾기</a>
 			</div>
 			<div class="d-flex justify-content-center my-3 pb-3">
 				<a href="/user/sign_up_view"><button type="button" id="signUpBtn" class="btn btn-dark text-white">회원가입</button></a>

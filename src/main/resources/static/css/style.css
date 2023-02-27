@@ -31,6 +31,7 @@ a:hover {text-decoration:none; color:#000;}
 .sign-up-title-box {font-size:25px;}
 #emailCheckBtn {margin-left:68px;}
 
+
 .detail-box {width:950px;}
 .comment-box {width:950px; min-height:100px;}
 .comment-btn {width:60px; height:35px;}
@@ -47,3 +48,4 @@ thead {height:30px;}
 .address {width:700px;}
 
 .non-box {width:470px;}
+

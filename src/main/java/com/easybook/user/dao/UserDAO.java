@@ -10,6 +10,8 @@ public interface UserDAO {
 	
 	public boolean exsitLoginId(String loginId);
 	
+	public boolean exsitEmail(String email);
+	
 	public int insertUser(
 			@Param("name") String name,
 			@Param("loginId") String loginId,
@@ -24,4 +26,8 @@ public interface UserDAO {
 			@Param("password") String password);
 	
 	public User selectUserById(int id);
+	
+	public User selectUserByNameEmail(
+			@Param("name") String name,
+			@Param("email") String email);
 }

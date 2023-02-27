@@ -16,6 +16,10 @@ public class UserBO {
 		return userDAO.exsitLoginId(loginId);
 	}
 	
+	public boolean existEmail(String email) {
+		return userDAO.exsitEmail(email);
+	}
+	
 	public int addUser(
 			String name, String loginId, String password,
 			String email, String phoneNumber, String postCode,
@@ -29,6 +33,10 @@ public class UserBO {
 	
 	public User getUserById(int id) {
 		return userDAO.selectUserById(id);
+	}
+	
+	public User getUserByNameEmail(String name, String email) {
+		return userDAO.selectUserByNameEmail(name, email);
 	}
 	
 }

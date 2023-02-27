@@ -544,6 +544,7 @@
 					
 						, success:function(data) {
 							if (data.code == 1) {
+								alert("상품이 장바구니에 담겼습니다.");
 								location.reload();
 							} else {
 								alert(data.errorMessage);
@@ -562,7 +563,7 @@
 					let author = $('#productData').data('author');
 					let publisher = $('#productData').data('publisher');
 					let pubDate = $('#productData').data('pub-date');
-					let pricrStandard = $('#productData').data('price-standard');
+					let priceStandard = $('#productData').data('price-standard');
 					let priceSales = $('#productData').data('price-sales');
 					let coverImgUrl = $('#productData').data('cover-img-url');
 					
@@ -570,14 +571,24 @@
 					
 					$.ajax({
 						type:"post"
-						, url:""
+						, url:"/cart/create"
 						, data:{"itemId":itemId, "title":title, "author":author, "publisher":publisher,
-							"pubDate":pubDate, "pricrStandard":pricrStandard, "priceSales":priceSales,
+							"pubDate":pubDate, "priceStandard":priceStandard, "priceSales":priceSales,
 							"coverImgUrl":coverImgUrl, "productCount":productCount}
 					
 						, success:function(data) {
 							if (data.code == 1) {
-								location.href = "/shop/order_view";
+								$.ajax({
+									type:"get"
+									, url:"/shop/order_view"
+								
+									, success:function() {
+										location.href = "/shop/order_view";
+									}
+									, error: function(e) {
+										alert("실패");
+									}
+								});
 							} else {
 								alert(data.errorMessage);
 							}

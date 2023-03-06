@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.easybook.common.EncryptUtils;
+import com.easybook.common.MakePassword;
 import com.easybook.user.bo.UserBO;
+import com.easybook.user.bo.UserServiceBO;
 import com.easybook.user.model.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +24,8 @@ public class UserRestController {
 	
 	@Autowired
 	private UserBO userBO;
+	@Autowired
+	private UserServiceBO userServiceBO;
 	
 	@GetMapping("/is_duplicated_id")
 	public Map<String, Object> isDuplicatedId(
@@ -129,4 +133,83 @@ public class UserRestController {
 		return result;
 	}
 	
+	@PostMapping("/password_check")
+	public Map<String, Object> passwordCheck(
+			@RequestParam("loginId") String loginId
+			, @RequestParam("password") String password
+			, HttpSession session) {
+		String hashedPassword = EncryptUtils.md5(password);
+		
+		Map<String, Object> result = new HashMap<>();
+		boolean checkPassword = userBO.checkPasswordByLoginIdPassword(loginId, hashedPassword);
+		
+		if (checkPassword) {
+			result.put("code", 1);
+			session.setAttribute("passwordCheck", "비밀번호 확인 성공");
+		} else {
+			result.put("code", 500);
+			result.put("errorMessage", "비밀번호가 일치하지 않습니다.");
+		}
+		
+		return result;
+	}
+	
+	@PostMapping("/update")
+	public Map<String, Object> updateUser(
+			@RequestParam(value="nickname", required=false) String nickname
+			, @RequestParam(value="postCode", required=false) String postCode
+			, @RequestParam(value="address", required=false) String address
+			, @RequestParam(value="phoneNumber", required=false) String phoneNumber
+			, @RequestParam(value="passwordCheck", required=false) String passwordCheck
+			, @RequestParam(value="newPassword", required=false) String newPassword
+			, HttpSession session) {
+		String hashedPasswordCheck = null;
+		String hashedPassword = null;
+		if (passwordCheck != null) {
+			hashedPasswordCheck = EncryptUtils.md5(passwordCheck);
+		}
+		if (newPassword != null) {
+			hashedPassword = EncryptUtils.md5(newPassword);
+		}
+		String loginId = (String)session.getAttribute("userLoginId");
+		Map<String, Object> result = new HashMap<>();
+		int row = userServiceBO.updateUserById(loginId, nickname, postCode, address, phoneNumber, hashedPasswordCheck, hashedPassword);
+		if (row == 500) {
+			result.put("code", 500);
+			result.put("errorMessage", "기존 비밀번호와 같지 않습니다.");
+		} else if (row == 1) {
+			result.put("code", 1);
+			result.put("result", "변경이 완료되었습니다.");
+		} else if (row < 1) {
+			result.put("code", 500);
+			result.put("errorMessage", "개인정보 수정에 실패했습니다. 관리자에게 문의해 주세요.");
+		}
+		
+		return result;
+	}
+	
+	@PostMapping("/find_password")
+	public Map<String, Object> findPassword(
+			@RequestParam("loginId") String loginId
+			, @RequestParam("name") String name
+			, @RequestParam("phoneNumber") String phoneNumber) {
+		Map<String, Object> result = new HashMap<>();
+		User user = userBO.getUserByLoginIdNamePhoneNumber(loginId, name, phoneNumber);
+		if (user != null) {
+			String tempPassword = MakePassword.randomPassword(9);
+			int row = userBO.updateUserById(user.getId(), EncryptUtils.md5(tempPassword));
+			if (row > 0) {
+				result.put("code", 1);
+				result.put("userName", user.getName());
+				result.put("tempPassword", tempPassword);
+			} else {
+				result.put("code", 500);
+				result.put("errorMessage", "임시 비밀번호 생성에 실패했 습니다.");
+			}
+		} else {
+			result.put("code", 500);
+			result.put("errorMessage", "가입되어 있지 않은 정보입니다.");
+		}
+		return result;
+	}
 }

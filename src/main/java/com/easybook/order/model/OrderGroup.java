@@ -5,13 +5,12 @@ import java.util.Date;
 public class OrderGroup {
 	
 	private int id;
-	private int userid;
-	private int nonMemberId;
+	private Integer userid;
+	private Integer nonMemberId;
 	private String consigneeName;
 	private String consigneePhoneNumber;
 	private String postCode;
 	private String address;
-	private String deliveryStatus;
 	private int totalPrice;
 	private Date createdAt;
 	private Date updatedAt;
@@ -23,16 +22,16 @@ public class OrderGroup {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserid() {
+	public Integer getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
+	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
-	public int getNonMemberId() {
+	public Integer getNonMemberId() {
 		return nonMemberId;
 	}
-	public void setNonMemberId(int nonMemberId) {
+	public void setNonMemberId(Integer nonMemberId) {
 		this.nonMemberId = nonMemberId;
 	}
 	public String getConsigneeName() {
@@ -59,12 +58,6 @@ public class OrderGroup {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getDeliveryStatus() {
-		return deliveryStatus;
-	}
-	public void setDeliveryStatus(String deliveryStatus) {
-		this.deliveryStatus = deliveryStatus;
-	}
 	public int getTotalPrice() {
 		return totalPrice;
 	}
@@ -83,6 +76,7 @@ public class OrderGroup {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 	
 	
 }

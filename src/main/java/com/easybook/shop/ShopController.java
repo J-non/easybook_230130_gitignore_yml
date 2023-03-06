@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.easybook.api.bo.AladdinApiBO;
 import com.easybook.api.model.Book;
-import com.easybook.cart.bo.CartBO;
 import com.easybook.comment.bo.CommentBO;
 import com.easybook.comment.model.CommentView;
 import com.easybook.shop.bo.ShopBO;
@@ -37,9 +36,6 @@ public class ShopController {
 	
 	@Autowired
 	private ShopBO shopBO;
-	
-	@Autowired
-	private CartBO cartBO;
 	
 	@GetMapping("/detail_view")
 	public String detailView(

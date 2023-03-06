@@ -16,11 +16,6 @@
 				</div>
 				<button type="button" id="loginBtn" class="btn btn-dark text-white font-weight-bold ml-2" >로그인</button>
 			</div>
-			<div class="d-flex justify-content-center pb-3">
-				<a href="#">아이디 찾기</a>
-				<span class="mx-3">l</span>
-				<a href="#">비밀번호 찾기</a>
-			</div>
 		</div>
 	</div>
 	<!-- 비회원 회원가입 -->
@@ -195,7 +190,7 @@
 			
 				, success:function(data) {
 					if (data.code == 1) {
-						location.href = "/shop/cart_view";
+						location.href = "/main/home";
 					} else {
 						alert(data.errorMessage);
 					}

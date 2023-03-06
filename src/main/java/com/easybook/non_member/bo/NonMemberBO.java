@@ -24,4 +24,7 @@ public class NonMemberBO {
 		return nonMemberDAO.selectNonMemberByEmailPassword(email, password);
 	}
 	
+	public NonMember getNonMemberById(int nonMemberId) {
+		return nonMemberDAO.selectNonMemberById(nonMemberId);
+	}
 }

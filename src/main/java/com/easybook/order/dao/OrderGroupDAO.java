@@ -1,5 +1,7 @@
 package com.easybook.order.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +20,14 @@ public interface OrderGroupDAO {
 			@Param("totalPrice") int totalPrice);
 	
 	public OrderGroup selectOrderGroupByUserIdNonMemberId(
+			@Param("userId") Integer userId,
+			@Param("nonMemberId") Integer nonMemberId);
+	
+	public OrderGroup selectOrderGroupById(int orderGroupId);
+	
+	public List<OrderGroup> selectOrderGroupList();
+	
+	public List<OrderGroup> selectOrderGroupListByUserIdNonMemberId(
 			@Param("userId") Integer userId,
 			@Param("nonMemberId") Integer nonMemberId);
 	

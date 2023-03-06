@@ -27,4 +27,48 @@
  			, NOW()
  		)
  	</insert>
+ 	
+ 	<select id="selectOrderListByOrderGroupId" resultType="com.easybook.order.model.Order">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nonMemberId`
+			, `orderGroupId`
+			, `productId`
+			, `amount`
+			, `totalPrice`
+			, `deliveryStatus`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`order`
+		WHERE
+			`orderGroupId` = #{orderGroupId}
+ 	</select>
+ 	
+ 	<select id="selectOrderById" resultType="com.easybook.order.model.Order">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nonMemberId`
+			, `orderGroupId`
+			, `productId`
+			, `amount`
+			, `totalPrice`
+			, `deliveryStatus`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`order`
+		WHERE
+			`id` = #{orderId}
+ 	</select>
+ 	
+ 	<update id="updateOrderById" parameterType="map">
+ 		UPDATE `order`
+ 		SET
+ 			`deliveryStatus` = #{deliveryStatus}
+ 		WHERE
+ 			`id` = #{orderId}
+ 	</update>
  </mapper>

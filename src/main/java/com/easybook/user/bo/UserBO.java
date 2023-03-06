@@ -39,4 +39,20 @@ public class UserBO {
 		return userDAO.selectUserByNameEmail(name, email);
 	}
 	
+	public boolean checkPasswordByLoginIdPassword(String loginId, String password) {
+		return userDAO.checkPasswordByLoginIdPassword(loginId, password);
+	}
+	
+	public int updateUserByloginId(String loginId, String nickname, String postCode, String address, String phoneNumber,
+			String newPassword) {
+		return userDAO.updateUserByloginId(loginId, nickname, postCode, address, phoneNumber, newPassword);
+	}
+	
+	public User getUserByLoginIdNamePhoneNumber(String loginId, String name, String phoneNumber) {
+		return userDAO.selectUserByLoginIdNamePhoneNumber(loginId, name, phoneNumber);
+	}
+	
+	public int updateUserById(int userId, String password) {
+		return userDAO.updateUserById(userId, password);
+	}
 }

@@ -42,11 +42,6 @@
 				</div>
 				<button type="button" id="nMLoginBtn" class="btn btn-dark text-white font-weight-bold ml-2" >조회하기</button>
 			</div>
-			<div class="d-flex justify-content-center">
-				<a href="#">이메일 주소 찾기</a>
-				<span class="mx-3">l</span>
-				<a href="#">비밀번호 찾기</a>
-			</div>
 			<div class="d-flex justify-content-center my-3 pb-3">
 				<a href="/non_member/sign_up_view"><button type="button" id="nMSignUpBtn" class="btn btn-dark text-white">비회원 주문하기</button></a>
 			</div>
@@ -116,6 +111,39 @@
 				}
 			});
 		}); // 로그인 끝
+		
+		// 비회원 주문조회
+		$('#nMLoginBtn').on('click', function() {
+			let email = $('#email').val().trim();
+			let password = $('#nMPassword').val().trim();
+			
+			
+			if (email == "") {
+				alert("이메일 주소를 입력해주세요.");
+				return;
+			}
+			if (password == "") {
+				alert("비밀번호를 입력해주세요.");
+				return;
+			}
+			
+			$.ajax({
+				type:"post"
+				, url:"/non_member/sign_in"
+				, data:{"email":email, "password":password}
+			
+				, success:function(data) {
+					if (data.code == 1) {
+						location.href = "/account/order_history_view";
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("로그인 실패");
+				}
+			});
+		});	// 비회원 주문조회 끝
 		
 	});
 </script>

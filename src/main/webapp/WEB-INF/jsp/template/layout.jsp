@@ -21,12 +21,19 @@
 
 	<div id="wrap" class="container">
 		<header>
-			<jsp:include page="../include/header.jsp" />
+			<c:choose>
+				<c:when test="${fn:contains(viewName, 'admin')}">
+					<jsp:include page="../admin/adminHeader.jsp" />
+				</c:when>
+				<c:otherwise>
+					<jsp:include page="../include/header.jsp" />
+				</c:otherwise>
+			</c:choose>
 		</header>
 		
 		<section>
 			<c:choose>
-				<c:when test="${fn:contains(viewName, 'user') || fn:contains(viewName, 'non')}">
+				<c:when test="${fn:contains(viewName, 'user') || fn:contains(viewName, 'non') || fn:contains(viewName, 'admin')}">
 					<jsp:include page="../${viewName}.jsp" />
 				</c:when>
 				<c:otherwise>

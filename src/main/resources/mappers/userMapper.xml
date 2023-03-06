@@ -12,6 +12,7 @@
  			`loginId` = #{loginId}
  	</select>
  	
+ 	
  	<select id="exsitEmail" parameterType="string" resultType="boolean">
  		SELECT
  			COUNT(*)
@@ -108,4 +109,63 @@
 			`name` = #{name}
 			AND `email` = #{email}
  	</select>
+ 	
+ 	<select id="checkPasswordByLoginIdPassword" parameterType="map" resultType="boolean">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`loginId` = #{loginId}
+ 			AND `password` = #{password}
+ 	</select>
+ 	
+ 	<update id="updateUserByloginId">
+ 		UPDATE `user`
+ 		SET
+ 			<if test="nickname != null">
+ 				`nickname` = #{nickname}
+ 			</if>
+ 			<if test="postCode != null">
+ 				`postCode` = #{postCode}
+ 				, `address` = #{address}
+ 			</if>
+ 			<if test="phoneNumber != null">
+ 				`phoneNumber` = #{phoneNumber}
+ 			</if>
+ 			<if test="newPassword != null">
+ 				`password` = #{newPassword}
+ 			</if>
+ 		WHERE
+ 			`loginId` = #{loginId}
+ 	</update>
+ 	
+ 	<select id="selectUserByLoginIdNamePhoneNumber" parameterType="map" resultType="com.easybook.user.model.User">
+ 		SELECT
+ 			`id`
+			, `name`
+			, `loginId`
+			, `password`
+			, `nickname`
+			, `email`
+			, `phoneNumber`
+			, `postCode`
+			, `address`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`loginId` =#{loginId}
+			AND `name` = #{name}
+			AND `phoneNumber` = #{phoneNumber}
+ 	</select>
+ 	
+ 	<update id="updateUserById" parameterType="map">
+ 		UPDATE `user`
+ 		SET
+ 			`password` = #{password}
+ 		WHERE
+ 			`id` = #{userId}
+ 	</update>
  </mapper>

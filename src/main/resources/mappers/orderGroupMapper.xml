@@ -39,7 +39,6 @@
 			, `consigneePhoneNumber`
 			, `postCode`
 			, `address`
-			, `deliveryStatus`
 			, `totalPrice`
 			, `createdAt`
 			, `updatedAt`
@@ -55,4 +54,64 @@
 		ORDER BY
 			`createdAt` DESC LIMIT 1
  	</select>
+ 	
+ 	<select id="selectOrderGroupById" resultType="com.easybook.order.model.OrderGroup">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nonMemberId`
+			, `consigneeName`
+			, `consigneePhoneNumber`
+			, `postCode`
+			, `address`
+			, `totalPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`order_group`
+		WHERE
+			`id` = #{orderGroupId}
+ 	</select>
+ 	
+ 	<select id="selectOrderGroupList" resultType="com.easybook.order.model.OrderGroup">
+	 	SELECT
+			`id`
+			, `userId`
+			, `nonMemberId`
+			, `consigneeName`
+			, `consigneePhoneNumber`
+			, `postCode`
+			, `address`
+			, `totalPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`order_group`
+		ORDER BY `createdAt` DESC LIMIT 500;
+ 	</select>
+ 	<select id="selectOrderGroupListByUserIdNonMemberId" parameterType="map" resultType="com.easybook.order.model.OrderGroup">
+ 		SELECT
+ 			`id`
+			, `userId`
+			, `nonMemberId`
+			, `consigneeName`
+			, `consigneePhoneNumber`
+			, `postCode`
+			, `address`
+			, `totalPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`order_group`
+		WHERE
+			<if test="userId != null">
+				`userId` = #{userId}
+			</if>
+			<if test="nonMemberId != null">
+				`nonMemberId` = #{nonMemberId}
+			</if>
+		ORDER BY
+			`id` DESC
+ 	</select>
+ 	
  </mapper>

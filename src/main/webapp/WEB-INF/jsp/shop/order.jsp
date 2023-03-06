@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="d-flex justify-content-center mt-4">
 	<table class="table text-center border-0">
-		<thead class="bg-secondary text-white">
+		<thead class="bg-dark text-white">
 			<tr>
 				<th class="col-1 p-0">No.</th>
 				<th class="col-4 p-0">상품명</th>
@@ -207,7 +207,7 @@
 			let address = "";
 			if ($('#newAddress').hasClass('d-none')) {
 				postCode = $('#defaultAddress').data('post-code');
-				address = $('#defaultAddress').data('post-code');
+				address = $('#defaultAddress').data('address');
 			} else {
 				postCode = $('#postCode').val();
 				address = $('#address').val().trim() + $('#detailAddress').val().trim();
@@ -236,7 +236,7 @@
 				return;
 			}
 			
-			if ($('#detailAddress').val() == "") {
+			if ($('#newAddress').hasClass('d-none') == false && $('#detailAddress').val() == "") {
 				alert("상세주소를 입력해 주세요");
 				return;
 			}

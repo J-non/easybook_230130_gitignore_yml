@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.easybook.admin.dao.AdminDAO">
+ 
+ 	<select id="selectAdminByLoginIdPassword" parameterType="map" resultType="com.easybook.admin.model.Admin">
+ 		SELECT
+ 			`id`
+			, `managerName`
+			, `loginId`
+			, `password`
+			, `authority`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`admin`
+		WHERE
+			`loginId` = #{loginId}
+			AND `password` = #{password}
+ 	</select>
+ 	
+ 	<select id="selectAdminList" resultType="com.easybook.admin.model.Admin">
+ 		SELECT
+ 			`id`
+			, `managerName`
+			, `loginId`
+			, `password`
+			, `authority`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`admin`
+ 	</select>
+ 	
+ 	<update id="updateAdminById" parameterType="map">
+ 		UPDATE `admin`
+ 		SET
+ 			`authority` = #{authority}
+ 		WHERE
+ 			`id` = #{adminId}
+ 	</update>
+ 	
+ 	<delete id="deleteAdminById">
+ 		DELETE FROM `admin`
+ 		WHERE
+ 			`id` = #{daminId}
+ 	</delete>
+ 	
+ 	<select id="exsitLoginId" parameterType="string" resultType="boolean">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`admin`
+ 		WHERE
+ 			`loginId` = #{loginId}
+ 	</select>
+ 	
+ 	<insert id="insertUser" parameterType="map">
+ 		INSERT INTO `admin`
+ 		(
+			`managerName`
+			, `loginId`
+			, `password`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{managerName}
+ 			, #{loginId}
+ 			, #{password}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ </mapper>
+ 

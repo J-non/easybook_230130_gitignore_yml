@@ -22,16 +22,6 @@ public class nonMemberRestController {
 	@Autowired
 	private NonMemberBO nonMemberBO;
 	
-	/*
-	 * @PostMapping("/is_duplicated_email") public Map<String, Object>
-	 * isDuplicatedEmail(
-	 * 
-	 * @RequestParam("emailAddress") String email) { boolean isDuplicated =
-	 * nonMemberBO.existEmail(email); Map<String, Object> result = new HashMap<>();
-	 * if (isDuplicated) { result.put("result", true); } else { result.put("result",
-	 * false); } return result; }
-	 */
-	
 	@PostMapping("/sign_in")
 	public Map<String, Object> signIn(
 			@RequestParam("email") String email
@@ -82,7 +72,6 @@ public class nonMemberRestController {
 				result.put("errorMessage", "요청 실패. 관리자에게 문의하세요.");
 			}
 		}
-		
 		return result;
 	}
 	

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mt-5">
 	<!-- 카테고리 메뉴 -->
 	<div class="category-menu col-2 border form-control">
 		<div>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="d-flex justify-content-center mt-4">
 	<table class="table text-center border-0">
-		<thead class="bg-secondary text-white">
+		<thead class="bg-dark text-white">
 			<tr>
 				<th class="col-1">
 					<input type="checkbox" id="checkAll" checked>
@@ -59,7 +59,7 @@
 	</table>
 </div>
 <div class="d-flex justify-content-center">
-	<div class="d-flex justify-content-center bg-secondary cart-box">
+	<div class="d-flex justify-content-center bg-dark cart-box">
 		 <div class="cart-box2 font-weight-bold text-white">
 		 	<div class="d-flex justify-content-between my-1">
 		 		<div>주문한 상품 수</div>

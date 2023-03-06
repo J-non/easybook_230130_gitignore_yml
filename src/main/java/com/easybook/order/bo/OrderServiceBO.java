@@ -45,4 +45,14 @@ public class OrderServiceBO {
 		return result;
 	}
 	
+	public int updateOrderOrderGroupById(int orderId, String deliveryStatus) {
+		Integer result = 500;
+		int row = orderBO.updateOrderById(orderId, deliveryStatus);
+		if (row > 0) {
+			result = 1;
+		} else {
+			result = 500;
+		}
+		return result;
+	}
 }

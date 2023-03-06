@@ -14,7 +14,7 @@
 				</div>
 				<input id="searchQuery" type="text" class="form-control col-9 border-start-0" name="query" placeholder="검색어는 띄어쓰기 없이 입력해 주세요">
 				<div class="input-group-append">
-					<button id="searchBtn" class="btn btn-secondary" type="submit">검색</button>
+					<button id="searchBtn" class="btn btn-dark" type="submit">검색</button>
 				</div>
 			</div>
 		</form>

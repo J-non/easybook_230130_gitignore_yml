@@ -19,4 +19,6 @@ public interface NonMemberDAO {
 			@Param("email") String email,
 			@Param("password") String password);
 	
+	public NonMember selectNonMemberById(int nonMemberId);
+	
 }

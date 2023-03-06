@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.easybook.order.bo.OrderBO;
 import com.easybook.order.bo.OrderServiceBO;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,8 @@ public class OrderRestController {
 	
 	@Autowired
 	private OrderServiceBO orderServiceBO;
+	@Autowired
+	private OrderBO orderBO;
 	
 	@PostMapping("/create")
 	public Map<String, Object> createOrder(
@@ -52,25 +55,22 @@ public class OrderRestController {
 			result.put("code", 500);
 			result.put("errorMessage", "주문 그룹 생성 실패.");
 		}
-//		int row = orderGroupBO.addOrderGroup(userId, nonMemberId, consigneeName, consigneePhoneNumber, postCode, address, totalPrice);
-//		int i = 0;
-//		if (row > 0) {
-//			OrderGroup orderGroup = orderGroupBO.getOrderGroupByUserIdNonMemberId(userId, nonMemberId);
-//			for (int productId : productIdList) {
-//				row = orderBO.addOrder(userId, nonMemberId, orderGroup.getId(), productId, productCountList.get(i), productTotalPriceList.get(i));
-//				i++;
-//			}
-//			if (row > 0) {
-//				cartBO.deleteCartByUserIdNonMemberId(userId, nonMemberId);
-//				result.put("code", 1);
-//			} else {
-//				result.put("code", 500);
-//				result.put("errorMessage", "주문 생성 실패.");
-//			}
-//		} else {
-//			result.put("code", 500);
-//			result.put("errorMessage", "주문 그룹 생성 실패.");
-//		}
+		return result;
+	}
+	
+	@PostMapping("/update")
+	public Map<String, Object> updateOrder(
+			@RequestParam("orderId") int orderId
+			, @RequestParam("deliveryStatus") String deliveryStatus) {
+		Map<String, Object> result = new HashMap<>();
+		
+		int row = orderServiceBO.updateOrderOrderGroupById(orderId, deliveryStatus);
+		if (row == 1) {
+			result.put("code", 1);
+		} else if (row == 500){
+			result.put("code", 500);
+			result.put("errorMessage", deliveryStatus + "요청에 실패했습니다.");
+		}
 		return result;
 	}
 	

@@ -33,6 +33,7 @@ public class UserController {
 		session.removeAttribute("userNickName");
 		session.removeAttribute("userPostCode");
 		session.removeAttribute("userAddress");
+		session.removeAttribute("passwordCheck");
 		return "redirect:/main/home";
 	}
 	

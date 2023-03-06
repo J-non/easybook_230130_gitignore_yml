@@ -9,7 +9,6 @@
 		<div><a href="#" class="category-btn" data-category-id="90833" data-category-name="건강/스포츠">건강/스포츠</a></div>
 		<div><a href="#" class="category-btn" data-category-id="90835" data-category-name="경제경영">경제경영</a></div>
 		<div><a href="#" class="category-btn" data-category-id="90837" data-category-name="교육/자료">교육/자료</a></div>
-		<div><a href="#" class="category-btn" data-category-id="90838" data-category-name="기술공학">기술공학</a></div>
 		<div><a href="#" class="category-btn" data-category-id="90845" data-category-name="에세이">에세이</a></div>
 		<div><a href="#" class="category-btn" data-category-id="90846" data-category-name="여행">여행</a></div>
 		<div><a href="#" class="category-btn" data-category-id="90847" data-category-name="역사">역사</a></div>

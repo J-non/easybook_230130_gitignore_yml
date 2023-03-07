@@ -87,7 +87,7 @@
 			, `updatedAt`
 		FROM
 			`order_group`
-		ORDER BY `createdAt` DESC LIMIT 500;
+		ORDER BY `id` DESC LIMIT 500;
  	</select>
  	<select id="selectOrderGroupListByUserIdNonMemberId" parameterType="map" resultType="com.easybook.order.model.OrderGroup">
  		SELECT

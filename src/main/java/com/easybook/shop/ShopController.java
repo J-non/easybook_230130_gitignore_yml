@@ -3,6 +3,8 @@ package com.easybook.shop;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +20,6 @@ import com.easybook.shop.bo.ShopBO;
 import com.easybook.shop.model.CartView;
 import com.easybook.user.bo.UserBO;
 import com.easybook.user.model.User;
-
-import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/shop")
 @Controller
@@ -37,6 +37,12 @@ public class ShopController {
 	@Autowired
 	private ShopBO shopBO;
 	
+	/**
+	 * 상품상세 화면
+	 * @param model
+	 * @param itemId
+	 * @return
+	 */
 	@GetMapping("/detail_view")
 	public String detailView(
 			Model model
@@ -52,6 +58,12 @@ public class ShopController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 장바구니 화면
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/cart_view")
 	public String cartView(
 			Model model
@@ -71,6 +83,14 @@ public class ShopController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 구매 화면
+	 * @param model
+	 * @param cartIdList1
+	 * @param cartIdList2
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/order_view")
 	public String orderView(
 			Model model
@@ -105,6 +125,11 @@ public class ShopController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 구매완료 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/complete_view")
 	public String completeView(
 			Model model) {

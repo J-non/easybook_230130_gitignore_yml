@@ -95,6 +95,9 @@
 						<c:when test="${order.deliveryStatus eq '배송중'}">
 							${order.deliveryStatus}
 						</c:when>
+						<c:when test="${order.deliveryStatus eq '취소완료'}">
+							${order.deliveryStatus}
+						</c:when>
 						<c:when test="${order.deliveryStatus eq '교환완료'}">
 							${order.deliveryStatus}
 						</c:when>

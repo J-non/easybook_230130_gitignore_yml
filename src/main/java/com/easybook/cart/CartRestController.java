@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.easybook.cart.bo.CartBO;
 import com.easybook.cart.bo.CartServiceBO;
 import com.easybook.product.bo.ProductBO;
-
-import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/cart")
 @RestController
@@ -30,6 +30,20 @@ public class CartRestController {
 	@Autowired
 	private CartServiceBO cartServiceBO;
 	
+	/**
+	 * 장바군 생성 API
+	 * @param itemId
+	 * @param title
+	 * @param author
+	 * @param publisher
+	 * @param priceStandard
+	 * @param priceSales
+	 * @param pubDate
+	 * @param coverImgUrl
+	 * @param productCount
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> createCart(
 			@RequestParam("itemId") int itemId
@@ -63,6 +77,13 @@ public class CartRestController {
 		return result;
 	}
 	
+	/**
+	 * 장바구니 추가, 내 DB에 상품 업로드 API
+	 * @param productIdList
+	 * @param productCountList
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/update")
 	public Map<String, Object> updateCart(
 			@RequestParam("productIdList[]") List<Integer> productIdList
@@ -89,6 +110,12 @@ public class CartRestController {
 		return result;
 	}
 	
+	/**
+	 * 장바구니 삭제 API
+	 * @param cartId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> deleteCart(
 			@RequestParam(value="cartId", required=false) Integer cartId

@@ -2,6 +2,8 @@ package com.easybook.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,6 @@ import com.easybook.admin.model.AdminSalesView;
 import com.easybook.order.bo.OrderBO;
 import com.easybook.order.bo.OrderGroupBO;
 
-import jakarta.servlet.http.HttpSession;
-
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
@@ -32,12 +32,23 @@ public class AdminController {
 	@Autowired
 	private AdminBO adminBO;
 	
+	/**
+	 * 관리자 로그인 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/sign_in_view")
 	public String signInView(Model model) {
 		model.addAttribute("viewName", "admin/adminSignIn");
 		return "template/layout";
 	}
 	
+	/**
+	 * 관리자 주문관리 화면
+	 * @param model
+	 * @param deliveryStatus
+	 * @return
+	 */
 	@GetMapping("/order_management_view")
 	public String orderManagementView(
 			Model model
@@ -54,6 +65,13 @@ public class AdminController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 관리자 주문관리 상세 화면
+	 * @param model
+	 * @param orderGroupId
+	 * @param orderId
+	 * @return
+	 */
 	@GetMapping("/order_detail_view")
 	public String orderDetailView(
 			Model model
@@ -65,6 +83,11 @@ public class AdminController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 관리자 로그아웃
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/sign_out")
 	public String signOut(HttpSession session) {
 		session.removeAttribute("adminId");
@@ -73,6 +96,11 @@ public class AdminController {
 		return "redirect:/admin/sign_in_view";
 	}
 	
+	/**
+	 * 관리자 계정관리 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/account_manage_view")
 	public String accountManageView(Model model) {
 		model.addAttribute("viewName", "admin/accountManage");
@@ -81,6 +109,11 @@ public class AdminController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 관리자 계정 추가 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/add_admin_view")
 	public String addAdminView(Model model) {
 		model.addAttribute("viewName", "admin/addAdmin");

@@ -3,6 +3,8 @@ package com.easybook.admin;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +17,6 @@ import com.easybook.admin.bo.AdminBO;
 import com.easybook.admin.model.Admin;
 import com.easybook.common.EncryptUtils;
 
-import jakarta.servlet.http.HttpSession;
-
 @RequestMapping("/admin")
 @RestController
 public class AdminRestController {
@@ -24,6 +24,13 @@ public class AdminRestController {
 	@Autowired
 	private AdminBO adminBO;
 	
+	/**
+	 * 관리자 로그인 API
+	 * @param loginId
+	 * @param password
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/sign_in")
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId
@@ -49,6 +56,12 @@ public class AdminRestController {
 		return result;
 	}
 	
+	/**
+	 * 관리자 등급 수정 API
+	 * @param adminId
+	 * @param authority
+	 * @return
+	 */
 	@PostMapping("/update")
 	public Map<String, Object> updateAdmin(
 			@RequestParam("adminId") int adminId
@@ -64,6 +77,11 @@ public class AdminRestController {
 		return result;
 	}
 	
+	/**
+	 * 관리자 계정 삭제 API
+	 * @param adminId
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> deleteAdmin(
 			@RequestParam("adminId") int adminId) {
@@ -78,6 +96,11 @@ public class AdminRestController {
 		return result;
 	}
 	
+	/**
+	 * 관리자 아이디 중복확인 API
+	 * @param loginId
+	 * @return
+	 */
 	@GetMapping("/is_duplicated_id")
 	public Map<String, Object> isDuplicatedId(
 			@RequestParam("loginId") String loginId) {
@@ -96,6 +119,13 @@ public class AdminRestController {
 		return result;
 	}
 	
+	/**
+	 * 관리자 계정 추가 API
+	 * @param managerName
+	 * @param loginId
+	 * @param password
+	 * @return
+	 */
 	@PostMapping("/add_admin")
 	public Map<String, Object> addUser(
 			@RequestParam("managerName") String managerName

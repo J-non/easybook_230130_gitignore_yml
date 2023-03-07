@@ -19,14 +19,19 @@ public class SearchController {
 	@Autowired
 	private AladdinApiBO aladdinApiBO;
 	
+	/**
+	 * 상품 검색 API
+	 * @param model
+	 * @param searchTarget
+	 * @param query
+	 * @return
+	 */
 	@GetMapping("/search_result")
 	public String search(
 			Model model
 			, @RequestParam("searchTarget") String searchTarget
 			, @RequestParam("query") String query) {
 		model.addAttribute("viewName", "search/searchResult");
-		// 검색어 없을 시 결과없음 페이지로
-
 		
 		List<Book> searchResultList = aladdinApiBO.searchBook("8", "1", searchTarget, query);
 		model.addAttribute("searchResultList", searchResultList);

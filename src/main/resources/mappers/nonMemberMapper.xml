@@ -56,5 +56,7 @@
 			, `updatedAt`
 		FROM
 			`non_member`
+		WHERE
+			`id` = #{nonMemberId}
  	</select>
  </mapper>

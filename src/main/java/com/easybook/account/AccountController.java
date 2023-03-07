@@ -2,6 +2,8 @@ package com.easybook.account;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,6 @@ import com.easybook.account.model.OrderHistoryView;
 import com.easybook.user.bo.UserBO;
 import com.easybook.user.model.User;
 
-import jakarta.servlet.http.HttpSession;
-
 @RequestMapping("/account")
 @Controller
 public class AccountController {
@@ -24,6 +24,12 @@ public class AccountController {
 	@Autowired
 	private OrderHistoryBO orderHistoryBO;
 	
+	/**
+	 * 구매내역 화면
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/order_history_view")
 	public String orderHistoryView(
 			Model model
@@ -44,6 +50,9 @@ public class AccountController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 비밀번호 재확인 화면
+	 */
 	@GetMapping("/password_confirm_view")
 	public String passwordConfirmView(
 			Model model
@@ -54,6 +63,12 @@ public class AccountController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 개인정보 화면
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/customer_info_view")
 	public String customerInfoView(
 			Model model

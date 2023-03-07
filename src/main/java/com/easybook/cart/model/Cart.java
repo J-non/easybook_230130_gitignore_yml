@@ -5,8 +5,8 @@ import java.util.Date;
 public class Cart {
 	
 	private int id;
-	private int userId;
-	private int nonMemberId;
+	private Integer userId;
+	private Integer nonMemberId;
 	private int productId;
 	private int productCount;
 	private Date createdAt;
@@ -19,23 +19,23 @@ public class Cart {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	public int getNonMemberId() {
+	public Integer getNonMemberId() {
 		return nonMemberId;
 	}
-	public void setNonMemberId(int nonMemberId) {
+	public void setNonMemberId(Integer nonMemberId) {
 		this.nonMemberId = nonMemberId;
 	}
 	public int getProductId() {
 		return productId;
 	}
-	public void setProductId(int porductId) {
-		this.productId = porductId;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public int getProductCount() {
 		return productCount;

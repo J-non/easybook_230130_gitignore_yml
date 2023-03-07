@@ -3,6 +3,8 @@ package com.easybook.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +18,6 @@ import com.easybook.user.bo.UserBO;
 import com.easybook.user.bo.UserServiceBO;
 import com.easybook.user.model.User;
 
-import jakarta.servlet.http.HttpSession;
-
 @RequestMapping("/user")
 @RestController
 public class UserRestController {
@@ -27,6 +27,11 @@ public class UserRestController {
 	@Autowired
 	private UserServiceBO userServiceBO;
 	
+	/**
+	 * 아이디 중복확인 API
+	 * @param loginId
+	 * @return
+	 */
 	@GetMapping("/is_duplicated_id")
 	public Map<String, Object> isDuplicatedId(
 			@RequestParam("loginId") String loginId) {
@@ -45,6 +50,11 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 이메일 중복확인 API
+	 * @param emailAddress
+	 * @return
+	 */
 	@GetMapping("/is_duplicated_email")
 	public Map<String, Object> isDuplicatedEmail(
 			@RequestParam("emailAddress") String emailAddress) {
@@ -63,6 +73,19 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 회원가입 API
+	 * @param name
+	 * @param loginId
+	 * @param password
+	 * @param email
+	 * @param domain
+	 * @param phoneNumber
+	 * @param postCode
+	 * @param address
+	 * @param detailAddress
+	 * @return
+	 */
 	@PostMapping("/sign_up")
 	public Map<String, Object> addUser(
 			@RequestParam("name") String name
@@ -90,6 +113,13 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 회원 로그인 API
+	 * @param loginId
+	 * @param password
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/sign_in")
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId
@@ -117,6 +147,12 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 아이디 찾기 API
+	 * @param name
+	 * @param email
+	 * @return
+	 */
 	@PostMapping("/find_login_id")
 	public Map<String, Object> findLoginId(
 			@RequestParam("name") String name
@@ -133,6 +169,13 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 비밀번호 재확인 API
+	 * @param loginId
+	 * @param password
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/password_check")
 	public Map<String, Object> passwordCheck(
 			@RequestParam("loginId") String loginId
@@ -154,6 +197,17 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 개인정보 수정 API
+	 * @param nickname
+	 * @param postCode
+	 * @param address
+	 * @param phoneNumber
+	 * @param passwordCheck
+	 * @param newPassword
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/update")
 	public Map<String, Object> updateUser(
 			@RequestParam(value="nickname", required=false) String nickname
@@ -188,6 +242,13 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 회원 비밀번호 찾기 API
+	 * @param loginId
+	 * @param name
+	 * @param phoneNumber
+	 * @return
+	 */
 	@PostMapping("/find_password")
 	public Map<String, Object> findPassword(
 			@RequestParam("loginId") String loginId

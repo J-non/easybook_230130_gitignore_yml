@@ -3,6 +3,8 @@ package com.easybook.non_member;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +15,6 @@ import com.easybook.common.EncryptUtils;
 import com.easybook.non_member.bo.NonMemberBO;
 import com.easybook.non_member.model.NonMember;
 
-import jakarta.servlet.http.HttpSession;
-
 @RequestMapping("/non_member")
 @RestController
 public class nonMemberRestController {
@@ -22,6 +22,13 @@ public class nonMemberRestController {
 	@Autowired
 	private NonMemberBO nonMemberBO;
 	
+	/**
+	 * 비회원 로그인 API
+	 * @param email
+	 * @param password
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/sign_in")
 	public Map<String, Object> signIn(
 			@RequestParam("email") String email
@@ -44,6 +51,15 @@ public class nonMemberRestController {
 		return result;
 	}
 	
+	/**
+	 * 비회원 회원가입 API
+	 * @param email
+	 * @param domain
+	 * @param name
+	 * @param password
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/sign_up")
 	public Map<String, Object> signUp(
 			@RequestParam("email") String email

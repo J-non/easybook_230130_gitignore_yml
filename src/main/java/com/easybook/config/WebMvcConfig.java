@@ -19,7 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 		.addPathPatterns("/**")		//	/** 아래 디렉토리까지 확인
 		.excludePathPatterns("/favicon.ico", "/error", "/static/**", "/user/sign_out", "/non_member/sign_out",
 				"/shop/detail_view", "/user/password_check",
-				"/user/update", "/admin/sign_in_view", "/admin/sign_in");
+				"/user/update");
 	}
 	
 }

@@ -19,6 +19,11 @@ public class MainController {
 	@Autowired
 	private AladdinApiBO aladdinApiBO;
 	
+	/**
+	 * 메인 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/home")
 	public String mainView(
 			Model model
@@ -37,6 +42,14 @@ public class MainController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 국내도서 화면
+	 * @param model
+	 * @param start
+	 * @param categoryId
+	 * @param categoryName
+	 * @return
+	 */
 	@GetMapping("/kor_books")
 	public String korBooks(
 			Model model
@@ -54,6 +67,11 @@ public class MainController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 신간도서 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/new_books")
 	public String newBooks(Model model) {
 		model.addAttribute("viewName", "main/newBooks");
@@ -64,6 +82,13 @@ public class MainController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 외국도서 화면
+	 * @param model
+	 * @param categoryId
+	 * @param categoryName
+	 * @return
+	 */
 	@GetMapping("/foreign_books")
 	public String foreignBooks(
 			Model model

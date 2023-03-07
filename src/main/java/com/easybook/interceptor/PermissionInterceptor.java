@@ -2,15 +2,15 @@ package com.easybook.interceptor;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @Component
 public class PermissionInterceptor implements HandlerInterceptor {
@@ -31,10 +31,16 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		Integer adminId = (Integer)session.getAttribute("adminId");
 		
 		// 어드민 비로그인 => 어드민 로그인 페이지로 리다이렉트
-		if (adminId == null && uri.startsWith("/admin")) {
+		if (adminId == null && uri.startsWith("/admin") && uri.startsWith("/admin/sign") == false) {
 			response.sendRedirect("/admin/sign_in_view");
 			return false;
 		}
+		// 어드민 로그인 && /admin/sign_in => 어드민 주문관리로 리다이렉트
+		if (adminId != null && uri.startsWith("/admin/sign_in_view")) {
+			response.sendRedirect("/admin/order_management_view");
+			return false;
+		}
+		
 		
 		// 비로그인 && /account로 온 경우 => 로그인 페이지로 리다이렉트 return false
 		if (userId == null && uri.startsWith("/account") && (nonMemberId == null && uri.startsWith("/account"))) {

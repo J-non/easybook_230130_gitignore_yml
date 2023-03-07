@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.easybook.order.bo.OrderBO;
 import com.easybook.order.bo.OrderServiceBO;
-
-import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/order")
 @RestController
@@ -24,6 +24,19 @@ public class OrderRestController {
 	@Autowired
 	private OrderBO orderBO;
 	
+	/**
+	 * 주문그룹, 주문 생성 API
+	 * @param productIdList
+	 * @param productCountList
+	 * @param productTotalPriceList
+	 * @param consigneeName
+	 * @param consigneePhoneNumber
+	 * @param postCode
+	 * @param address
+	 * @param totalPrice
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> createOrder(
 			@RequestParam("productIdList[]") List<Integer> productIdList
@@ -58,6 +71,12 @@ public class OrderRestController {
 		return result;
 	}
 	
+	/**
+	 * 구매취소, 확정, 환불, 교환요청 API
+	 * @param orderId
+	 * @param deliveryStatus
+	 * @return
+	 */
 	@PostMapping("/update")
 	public Map<String, Object> updateOrder(
 			@RequestParam("orderId") int orderId

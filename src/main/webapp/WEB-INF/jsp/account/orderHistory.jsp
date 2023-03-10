@@ -166,6 +166,8 @@
 						}
 					});
 					return;
+				} else {
+					e.preventDefault();
 				}
 			}
 			
